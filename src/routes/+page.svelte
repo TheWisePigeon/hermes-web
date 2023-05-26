@@ -1,13 +1,8 @@
-<header class="flex justify-between items-center p-3 text-xl">
-	<a href="/" class="font-bold text-2xl">HERMES</a>
-	<div class="flex gap-5">
-		<a href="/docs" class="underline">Docs</a>
-		<a target="_blank" href="https://github.com/Hermes-Auth" class="underline">GitHub</a>
-		<a href="/auth" class="underline">Get started</a>
-	</div>
+<header class="flex justify-between p-2 items-center">
+    <h1 class="font-bold text-xl">HERMES</h1>
+    <div class="flex items-center gap-5">
+        <a href="/docs" class="underline">Docs</a>
+        <a href="https://github.com/Hermes-Auth" class="underline" target="_blank">GitHub</a>
+        <button class="rounded-md bg-blue-600 p-1 text-white">Get Started</button>
+    </div>
 </header>
-
-<h1 class="text-center text-3xl font-bold">
-	HERMES is a passwordless authentication API for seamless user verification via email. Simplify
-	authentication and enhance security in your applications.
-</h1>
