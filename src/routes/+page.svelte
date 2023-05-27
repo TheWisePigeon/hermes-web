@@ -3,6 +3,7 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { show_dialog } from '../lib/stores';
     const API_URL = import.meta.env.VITE_API_URL
 	onMount(() => {
 		if (browser) {
@@ -126,8 +127,18 @@
 			loading = false;
 			return;
 		}
+        loading = false
 		error_message = 'Something went wrong. Please retry or contact the developer';
 	}
+
+    function goto_console(){
+            const token = localStorage.getItem("auth_token") ?? ""
+            if(token===""){
+                    show_dialog.update(()=>true)
+                    return
+                }
+            goto("/console")
+        }
 </script>
 
 <header class="absolute flex justify-between w-full top-0 p-2 items-baseline">
@@ -135,6 +146,7 @@
 	<div class="flex gap-3">
 		<a href="/docs" class="underline">Docs</a>
 		<a href="https://github.com/TheWisePigeon/hermes" target="_blank" class="underline">GitHub</a>
+		<button on:click={goto_console} class="underline">Console</button>
 	</div>
 </header>
 
@@ -143,12 +155,13 @@
 		<h1 class=" text-4xl font-bold m-auto text-center">Seamless Passwordless Authentication</h1>
 		<h1 class="text-center">
 			Passwordless authentication made easy. Simplify verification, enhance security, and enjoy
-			seamless user experience with our user friendly API.
+			seamless user experience with our developer friendly API.
 		</h1>
 		<form
 			on:submit|preventDefault={authenticate}
 			class="mt-10 flex flex-col justify-center w-[80%] m-auto gap-3"
 		>
+            <h1 class="text-center">Try Hermes now!</h1>
 			<input
 				class="rounded-md p-2 focus:outline-none text-gray-900 text-center"
 				type="email"
@@ -182,3 +195,7 @@
 		</form>
 	</div>
 </div>
+
+<footer class="absolute bottom-0 w-full flex justify-center p-2 text-sm font-bold" >
+    <h1 class="text-center">Developped and maintained by <a class="text-blue-500 underline" href="https://github.com/TheWisePigeon" target="_blank">TheWisePigeon</a></h1>
+</footer>

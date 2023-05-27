@@ -1,5 +1,9 @@
 <script>
-    import "../app.css"
+	import '../app.css';
+	import Dialog from '../components/Dialog.svelte';
 </script>
 
-<slot />
+<main>
+	<Dialog />
+	<slot />
+</main>
