@@ -32,7 +32,6 @@
 			apps = data;
 		}
 	});
-	function copy_id() {}
 
 	let apps: { id: string; name: string; active: boolean; codes_ttl: string; owner: string }[];
 </script>
@@ -66,7 +65,7 @@
 										<td class="whitespace-nowrap px-6 py-4">{app.name}</td>
 										<td class="whitespace-nowrap px-6 py-4">{app.active}</td>
 										<td class="whitespace-nowrap px-6 py-4 flex gap-2">
-											<button title="Copy id">
+											<button on:click={()=>{ navigator.clipboard.writeText(app.id)  }}  title="Copy id">
 												<Copy />
 											</button>
 											<button title="Permanently delete">
