@@ -87,7 +87,7 @@
 						body: JSON.stringify({ email })
 					}).then(async (res) => (await res.json()) as { token: string });
 					localStorage.setItem('auth_token', token);
-                    localStorage.removeItem("saved_auth_state")
+                    localStorage.removeItem("auth_stage")
 					goto('/console');
 				}
 				if (response.status === 400) {
