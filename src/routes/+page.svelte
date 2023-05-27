@@ -3,6 +3,7 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+    const API_URL = import.meta.env.VITE_API_URL
 	onMount(() => {
 		if (browser) {
 			const saved_auth_state = localStorage.getItem('auth_stage') ?? '';
@@ -15,7 +16,6 @@
 			auth_stage = 'Get Code';
 		}
 	});
-    console.log(import.meta.env.VITE_APP_ID)
 	let email: string;
 	let code = '';
 	let loading = false;
@@ -34,7 +34,7 @@
 				return;
 			}
 			if (auth_stage === 'Get Code') {
-				const response = await fetch('http://127.0.0.1:5000/v1/request', {
+				const response = await fetch(`${API_URL}/v1/request`, {
 					headers: {
 						'x-hermes-auth': import.meta.env.VITE_HERMES_AUTH,
 						'Content-Type': 'application/json'
@@ -65,7 +65,7 @@
 					loading = false;
 					return;
 				}
-				const response = await fetch('http://127.0.0.1:5000/v1/verify', {
+				const response = await fetch(`${API_URL}/v1/verify`, {
 					headers: {
 						'x-hermes-auth': '888a4d17-005b-4df2-ab75-3681e03226b3',
 						'Content-Type': 'application/json'
@@ -78,7 +78,7 @@
 					method: 'POST'
 				});
 				if (response.status === 200) {
-					const { token } = await fetch('http://127.0.0.1:5000/auth', {
+					const { token } = await fetch(`${API_URL}/auth`, {
 						headers: {
 							'Content-Type': 'application/json'
 						},
@@ -108,14 +108,14 @@
 	async function get_new_code() {
 		loading = true;
 		code_sent = false;
-		const response = await fetch('http://127.0.0.1:5000/v1/request', {
+		const response = await fetch(`${API_URL}/v1/request`, {
 			headers: {
-				'x-hermes-auth': '888a4d17-005b-4df2-ab75-3681e03226b3',
+				'x-hermes-auth': import.meta.env.VITE_HERMES_AUTH,
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				target: email,
-				app_id: 'f161bf0f-52a5-47ba-bfec-73a5693e1eb2',
+				app_id: import.meta.env.VITE_APP_ID,
 				subject: 'Your Hermes authentication code'
 			}),
 			method: 'POST'
