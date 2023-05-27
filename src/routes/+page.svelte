@@ -15,6 +15,7 @@
 			auth_stage = 'Get Code';
 		}
 	});
+    console.log(import.meta.env.VITE_APP_ID)
 	let email: string;
 	let code = '';
 	let loading = false;
@@ -35,12 +36,12 @@
 			if (auth_stage === 'Get Code') {
 				const response = await fetch('http://127.0.0.1:5000/v1/request', {
 					headers: {
-						'x-hermes-auth': '888a4d17-005b-4df2-ab75-3681e03226b3',
+						'x-hermes-auth': import.meta.env.VITE_HERMES_AUTH,
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({
 						target: email,
-						app_id: 'f161bf0f-52a5-47ba-bfec-73a5693e1eb2',
+						app_id: import.meta.env.VITE_APP_ID,
 						subject: 'Your Hermes authentication code'
 					}),
 					method: 'POST'
