@@ -27,6 +27,7 @@
 						}[]
 				)
 				.catch((err) => {
+                    console.log(err)
 					throw new Error('FETCH_ERR');
 				});
 			apps = data;
@@ -68,7 +69,7 @@
 											<button on:click={()=>{ navigator.clipboard.writeText(app.id)  }}  title="Copy id">
 												<Copy />
 											</button>
-											<button title="Permanently delete">
+											<button title="Deactivate app">
 												<Trash />
 											</button>
 										</td>
